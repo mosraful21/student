@@ -14,3 +14,18 @@ require_once ("connection.php");
     }
 
 ?>
+
+
+
+
+<?php
+// require_once ("connection.php");
+
+// if(isset($_POST['searchData'])=="Search"){
+// 	$search = $_POST['search'];
+// 	$query = "SELECT * FROM form WHERE id ='$search' ";
+// 	$data = mysqli_query($dbCon, $query);
+// 	$numSrch = mysqli_num_rows($qrySrch);
+//     $result = mysqli_fetch_object($data);
+// }
+?>
