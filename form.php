@@ -42,6 +42,32 @@
     }
 ?>
 
+
+<!-- Update data in database -->
+<?php
+    if(isset($_POST['update'])){
+        $id       = $_POST['search'];
+        $name       = $_POST['name'];
+        $intake     = $_POST['intake'];
+        $section    = $_POST['section'];
+        $gender     = $_POST['gender'];
+        $email      = $_POST['email'];
+        $department = $_POST['department'];
+        $address    = $_POST['address'];
+
+        $query = "UPDATE form SET std_name='$name', std_intake='$intake', std_section='$section', std_gender='$gender', std_email='$email', std_department='$department', std_address='$address' WHERE id = '$id' ";
+        $data = mysqli_query($dbCon, $query);
+
+        if($data){
+            echo "<script> alert('Information Updated') </script>";
+        }
+        else{
+            echo "<script> alert('Failed to Updated') </script>";
+        }
+    }
+?>
+
+
 <!-- Delete data in database -->
 <?php
     if(isset($_POST['delete'])){
@@ -57,7 +83,6 @@
         }
     }
 ?>
-
 
 
 <!DOCTYPE html>
@@ -79,79 +104,20 @@
                 <input type="text" name="intake" class="textfield" placeholder="Intake" value="<?php if(isset($_POST['searchData'])){echo $result['std_intake'];} ?>">
                 <input type="text" name="section" class="textfield" placeholder="Section" value="<?php if(isset($_POST['searchData'])){echo $result['std_section'];} ?>">
 
-                <select class="textfield" name="gender">
-                    <option value="Not Selected">Select Gender</option>
-                    <option value="Male"
-                        <?php
-                            if($result['std_gender'] === "Male"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >Male</option>
-                    <option value="Female"
-                        <?php
-                            if($result['std_gender'] === "Female"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >Female</option>
-                    <option value="other"
-                        <?php
-                            if($result['std_gender'] === "Other"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >Other</option>
-                </select>
+                <input type="text" name="gender" class="textfield" placeholder="Gender" value="<?php if(isset($_POST['searchData'])){echo $result['std_gender'];} ?>">
 
                 <input type="email" name="email" class="textfield" placeholder="Email" value="<?php if(isset($_POST['searchData'])){echo $result['std_email'];} ?>">
 
-                <select class="textfield" name="department">
-                    <option>Select Department</option>
-                    <option value="CSE"
-                        <?php
-                            if($result['std_department'] === "CSE"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >CSE</option>
-                    <option value="EEE"
-                        <?php
-                            if($result['std_department'] === "EEE"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >EEE</option>
-                    <option value="Textile"
-                        <?php
-                            if($result['std_department'] === "Textile"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >Textile</option>
-                    <option value="BBA"
-                        <?php
-                            if($result['std_department'] === "BBA"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >BBA</option>
-                    <option value="English"
-                        <?php
-                            if($result['std_department'] === "English"){
-                                echo "Selected";
-                            }
-                        ?>
-                    >English</option>
-                </select>
+                <input type="text" name="department" class="textfield" placeholder="Department" value="<?php if(isset($_POST['searchData'])){echo $result['std_department'];} ?>">
+                
             
                 <textarea placeholder="Address" name="address"><?php if(isset($_POST['searchData'])){echo $result['std_address'];} ?></textarea>
 
                 <input type="submit" value="Search" name="searchData" class="btn" style="background-color: gray;">
                 <input type="submit" value="Save" name="save" class="btn" style="background-color: green;">
-                <input type="submit" value="Modify" name="" class="btn" style="background-color: orange;">
+                <input type="submit" value="Update" name="update" class="btn" style="background-color: orange;">
                 <input type="submit" value="Delete" name="delete" class="btn" style="background-color: red;">
-                <input type="submit" value="Clear" name="" class="btn" style="background-color: blue;">
+                <input type="reset" value="Clear" name="" class="btn" style="background-color: blue;">
             </div>
         </form>
     </div>
